@@ -1,0 +1,35 @@
+
+###
+
+GET http://localhost:3000/clientes
+
+
+###
+
+POST http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+    "name": "praia lalalfsdal",
+    "endereco": "rua sao jorge ",
+    "complemento": "casa 02",
+    "descricao": "o kok o ko ko k o"
+
+    
+}
+
+###
+
+PUT http://localhost:3000/clientes/ae14c592-c367-48d1-8e24-7f808b058c88
+Content-Type: application/json
+
+{ 
+    "name": "dasdsad lalalfsdal",
+    "endereco": "rdadsada sao jorge ",
+    "complemento": "casasdsad 02",
+    "descricao": "o kok dasdao ko ko k o"
+}
+
+###
+
+DELETE http://localhost:3000/clientes
