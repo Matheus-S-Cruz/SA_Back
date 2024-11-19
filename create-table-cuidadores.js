@@ -2,12 +2,13 @@ import { sql } from './db.js'
 
 sql`
   CREATE TABLE cuidadores (
-      id text PRIMARY KEY,
+      id_cuidador serial PRIMARY KEY,
       senha int,
-      name character varying(255),
-      endereco character varying(255),
-      complemento character varying(255),
-      descricao character varying(255)
+      name varchar(255),
+      cpf_cuidador varchar(11),
+      endereco varchar(255),
+      complemento varchar(255),
+      descricao varchar(255)
   );
 `.then(() => {
   console.log('tabela criada');
