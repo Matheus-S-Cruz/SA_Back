@@ -3,7 +3,7 @@ import { sql } from './db.js'
 sql`
   CREATE TABLE clientes (
       id_cliente serial PRIMARY KEY,
-      senha int,
+      senha varchar(255),
       name varchar(255),
       cpf_cliente varchar(11),
       endereco varchar(255),

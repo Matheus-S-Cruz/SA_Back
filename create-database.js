@@ -24,7 +24,7 @@ async function createLogins() {
   try {
     await sql`CREATE USER local WITH PASSWORD '12345';`;
 
-    await sql`GRANT ALL PRIVILEGES ON DATABASE users TO local;`;
+    await sql`GRANT ALL PRIVILEGES ON DATABASE logins TO local;`;
 
     await sql`GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO local;`;
 
