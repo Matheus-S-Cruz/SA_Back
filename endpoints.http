@@ -1,35 +1,31 @@
-
-###
-
-GET http://localhost:3000/clientes
-
-
-###
-
+### Create (POST) - Adicionar um novo cliente
 POST http://localhost:3000/clientes
 Content-Type: application/json
 
 {
-    "name": "praia lalalfsdal",
-    "endereco": "rua sao jorge ",
-    "complemento": "casa 02",
-    "descricao": "o kok o ko ko k o"
-
-    
+  "senha": "1234",
+  "name": "João Silva",
+  "cpf_cliente": "12345678901",
+  "endereco": "Rua das Flores, 123",
+  "complemento": "Apto 45",
+  "descricao": "Cliente preferencial"
 }
 
-###
+### Read (GET) - Obter todos os clientes
+GET http://localhost:3000/clientes
 
-PUT http://localhost:3000/clientes/ae14c592-c367-48d1-8e24-7f808b058c88
+### Update (PUT) - Atualizar dados de um cliente por ID
+PUT http://localhost:3000/clientes/id
 Content-Type: application/json
 
-{ 
-    "name": "dasdsad lalalfsdal",
-    "endereco": "rdadsada sao jorge ",
-    "complemento": "casasdsad 02",
-    "descricao": "o kok dasdao ko ko k o"
+{
+  "senha": "5678",
+  "name": "João Souza",
+  "cpf_cliente": "12345678901",
+  "endereco": "Avenida Central, 456",
+  "complemento": "Casa 2",
+  "descricao": "Cliente VIP"
 }
 
-###
-
-DELETE http://localhost:3000/clientes
+### Delete (DELETE) - Remover um cliente por ID
+DELETE http://localhost:3000/clientes/id

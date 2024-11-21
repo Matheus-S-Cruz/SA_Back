@@ -20,7 +20,13 @@ server.post('/clientes', async (request, reply) => {
         if(!body.name){
             error.name = 'Valor name não foi informado.'
     
-        } if (!body.endereco){
+        } if (!body.senha){
+            error.senha = 'Valor senha não foi informado.'
+        }
+        if (!body.cpf_cliente){
+            error.cpf_cliente = 'Valor cpf_cliente não foi informado.'
+        }
+        if (!body.endereco){
             error.endereco = 'Valor endereço não foi informado.'
         }
      if (!body.complemento){
@@ -57,7 +63,13 @@ server.put('/clientes/:id', async (request, reply) => {
     if(!body.name){
         error.name = 'Valor name não foi informado.'
 
-    } if (!body.endereco){
+    } if (!body.senha){
+        error.senha = 'Valor senha não foi informado.'
+    }
+    if (!body.cpf_cliente){
+        error.cpf_cliente = 'Valor cpf_cliente não foi informado.'
+    }
+    if (!body.endereco){
         error.endereco = 'Valor endereço não foi informado.'
     }
     if (!body.complemento){

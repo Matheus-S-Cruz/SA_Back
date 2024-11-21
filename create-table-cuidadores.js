@@ -2,7 +2,7 @@ import { sql } from './db.js'
 
 sql`
   CREATE TABLE cuidadores (
-      id_cuidador serial PRIMARY KEY,
+      id_cuidador text PRIMARY KEY,
       senha varchar(255),
       name varchar(255),
       cpf_cuidador varchar(11),

@@ -2,7 +2,7 @@ import { sql } from './db.js'
 
 sql`
   CREATE TABLE servicos (
-      id serial PRIMARY KEY,
+      id_servicos text PRIMARY KEY,
       tipo varchar(255) NOT NULL,
       data DATE NOT NULL,
       horario TIMESTAMP NOT NULL,
