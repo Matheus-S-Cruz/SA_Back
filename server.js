@@ -16,37 +16,38 @@ server.register(cors, {
 // CREATE
 server.post('/clientes', async (request, reply) => {
     const body = request.body;
-        let error = {};
-        if(!body.name){
-            error.name = 'Valor name não foi informado.'
-    
-        } if (!body.senha){
-            error.senha = 'Valor senha não foi informado.'
-        }
-        if (!body.cpf_cliente){
-            error.cpf_cliente = 'Valor cpf_cliente não foi informado.'
-        }
-        if (!body.endereco){
-            error.endereco = 'Valor endereço não foi informado.'
-        }
-     if (!body.complemento){
-        error.complemento = 'Valor complemento não foi informado.'
-         }
-         if (!body.descricao){
-    error.descricao = 'Valor descrição não foi informado.'
-        }
+    let error = {};
 
-    if(body.name && body.endereco){
+    // Validação de campos obrigatórios
+    if (!body.name) {
+        error.name = 'Valor name não foi informado.'
+    }
+    if (!body.senha) {
+        error.senha = 'Valor senha não foi informado.'
+    }
+    if (!body.cpf_cliente) {
+        error.cpf_cliente = 'Valor cpf_cliente não foi informado.'
+    }
+    if (!body.endereco) {
+        error.endereco = 'Valor endereço não foi informado.'
+    }
+    if (!body.complemento) {
+        error.complemento = 'Valor complemento não foi informado.'
+    }
+    if (!body.descricao) {
+        error.descricao = 'Valor descrição não foi informado.'
+    }
+
+    // Se todos os campos obrigatórios estiverem presentes, cria o cliente
+    if (body.name && body.endereco) {
         await databasePostgres.createCliente(body);
         return reply.status(201).send();
-
-    }else{
+    } else {
         return reply.status(400).send(error);
-
     }
-})
+});
 
-// READE
+// READ
 server.get('/clientes', async () => {
     const clientes = await databasePostgres.listClientes();
     return clientes;

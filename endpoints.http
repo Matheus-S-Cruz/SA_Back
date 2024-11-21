@@ -4,10 +4,10 @@ Content-Type: application/json
 
 {
   "senha": "1234",
-  "name": "João Silva",
-  "cpf_cliente": "12345678901",
-  "endereco": "Rua das Flores, 123",
-  "complemento": "Apto 45",
+  "name": "João Sasdasdilva",
+  "cpf_cliente": "12745678901",
+  "endereco": "Rua dasasdasd Flores, 123",
+  "complemento": "Apasdasdto 45",
   "descricao": "Cliente preferencial"
 }
 
