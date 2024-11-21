@@ -29,3 +29,60 @@ Content-Type: application/json
 
 ### Delete (DELETE) - Remover um cliente por ID
 DELETE http://localhost:3000/clientes/id
+
+
+### Create (POST) - Adicionar um novo cuidador
+POST http://localhost:3000/cuidadores
+Content-Type: application/json
+
+{
+  "senha": "1234",
+  "name": "Maria Silva",
+  "cpf_cuidador": "98765432100",
+  "endereco": "Rua das Palmeiras, 789",
+  "complemento": "Apto 6",
+  "descricao": "Cuidadora experiente"
+}
+
+### Read (GET) - Obter todos os cuidadores
+GET http://localhost:3000/cuidadores
+
+### Update (PUT) - Atualizar dados de um cuidador por ID
+PUT http://localhost:3000/cuidadores/id
+Content-Type: application/json
+
+{
+  "senha": "5678",
+  "name": "Maria Oliveira",
+  "cpf_cuidador": "12345678901",
+  "endereco": "Avenida das Orquídeas, 123",
+  "complemento": "Casa 3",
+  "descricao": "Cuidadora altamente qualificada"
+}
+
+### Delete (DELETE) - Remover um cuidador por ID
+DELETE http://localhost:3000/cuidadores/id
+
+
+### Create (POST) - Adicionar um novo admin
+POST http://localhost:3000/admins
+Content-Type: application/json
+
+{
+  "id_admin": "admin123",
+  "senha": "adminpass"
+}
+
+### Read (GET) - Obter todos os admins
+GET http://localhost:3000/admins
+
+### Update (PUT) - Atualizar dados de um admin por ID
+PUT http://localhost:3000/admins/id
+Content-Type: application/json
+
+{
+  "senha": "newadminpass"
+}
+
+### Delete (DELETE) - Remover um admin por ID
+DELETE http://localhost:3000/admins/id

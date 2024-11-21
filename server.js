@@ -100,6 +100,146 @@ server.delete('/clientes/:id', async (request, reply) => {
     return reply.status(204).send();
 })
 
+// CREATE - Cuidadores
+server.post('/cuidadores', async (request, reply) => {
+    const body = request.body;
+    let error = {};
+
+    // Validação de campos obrigatórios
+    if (!body.name) {
+        error.name = 'Valor name não foi informado.';
+    }
+    if (!body.senha) {
+        error.senha = 'Valor senha não foi informado.';
+    }
+    if (!body.cpf_cuidador) {
+        error.cpf_cuidador = 'Valor cpf_cuidador não foi informado.';
+    }
+    if (!body.endereco) {
+        error.endereco = 'Valor endereço não foi informado.';
+    }
+    if (!body.complemento) {
+        error.complemento = 'Valor complemento não foi informado.';
+    }
+    if (!body.descricao) {
+        error.descricao = 'Valor descrição não foi informado.';
+    }
+
+    // Se todos os campos obrigatórios estiverem presentes, cria o cuidador
+    if (body.name && body.endereco && body.cpf_cuidador) {
+        await databasePostgres.createCuidador(body);
+        return reply.status(201).send();
+    } else {
+        return reply.status(400).send(error);
+    }
+});
+
+// READ - Cuidadores
+server.get('/cuidadores', async () => {
+    const cuidadores = await databasePostgres.listCuidadores();
+    return cuidadores;
+});
+
+// UPDATE - Cuidadores
+server.put('/cuidadores/:id', async (request, reply) => {
+    const cuidadorID = request.params.id;
+    const body = request.body;
+
+    let error = {};
+
+    if (!body.name) {
+        error.name = 'Valor name não foi informado.';
+    }
+    if (!body.senha) {
+        error.senha = 'Valor senha não foi informado.';
+    }
+    if (!body.cpf_cuidador) {
+        error.cpf_cuidador = 'Valor cpf_cuidador não foi informado.';
+    }
+    if (!body.endereco) {
+        error.endereco = 'Valor endereço não foi informado.';
+    }
+    if (!body.complemento) {
+        error.complemento = 'Valor complemento não foi informado.';
+    }
+    if (!body.descricao) {
+        error.descricao = 'Valor descrição não foi informado.';
+    }
+    if (!cuidadorID) {
+        error.id = 'Valor ID não foi informado.';
+    }
+
+    if (body.name && body.endereco && cuidadorID) {
+        await databasePostgres.updateCuidador(cuidadorID, body);
+        return reply.status(200).send();
+    } else {
+        return reply.status(400).send(error);
+    }
+});
+
+// DELETE - Cuidadores
+server.delete('/cuidadores/:id', async (request, reply) => {
+    const cuidadorID = request.params.id;
+    await databasePostgres.deleteCuidador(cuidadorID);
+    return reply.status(204).send();
+});
+
+// CREATE - Admins
+server.post('/admins', async (request, reply) => {
+    const body = request.body;
+    let error = {};
+
+    // Validação de campos obrigatórios
+    if (!body.id_admin) {
+        error.id_admin = 'Valor id_admin não foi informado.';
+    }
+    if (!body.senha) {
+        error.senha = 'Valor senha não foi informado.';
+    }
+
+    // Se todos os campos obrigatórios estiverem presentes, cria o admin
+    if (body.id_admin && body.senha) {
+        await databasePostgres.createAdmin(body);
+        return reply.status(201).send();
+    } else {
+        return reply.status(400).send(error);
+    }
+});
+
+// READ - Admins
+server.get('/admins', async () => {
+    const admins = await databasePostgres.listAdmins();
+    return admins;
+});
+
+// UPDATE - Admins
+server.put('/admins/:id', async (request, reply) => {
+    const adminID = request.params.id;
+    const body = request.body;
+
+    let error = {};
+
+    if (!body.senha) {
+        error.senha = 'Valor senha não foi informado.';
+    }
+    if (!adminID) {
+        error.id = 'Valor ID não foi informado.';
+    }
+
+    if (body.senha && adminID) {
+        await databasePostgres.updateAdmin(adminID, body);
+        return reply.status(200).send();
+    } else {
+        return reply.status(400).send(error);
+    }
+});
+
+// DELETE - Admins
+server.delete('/admins/:id', async (request, reply) => {
+    const adminID = request.params.id;
+    await databasePostgres.deleteAdmin(adminID);
+    return reply.status(204).send();
+});
 
 server.listen({
     port: 3000
