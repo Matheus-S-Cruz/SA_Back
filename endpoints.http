@@ -69,7 +69,7 @@ POST http://localhost:3000/admins
 Content-Type: application/json
 
 {
-  "id_admin": "admin123",
+  "usuario_admin": "admin123",
   "senha": "adminpass"
 }
 
@@ -81,8 +81,39 @@ PUT http://localhost:3000/admins/id
 Content-Type: application/json
 
 {
+  "usuario.admin": "novoAdmin",
   "senha": "newadminpass"
 }
 
 ### Delete (DELETE) - Remover um admin por ID
 DELETE http://localhost:3000/admins/id
+
+### Create (POST) - Adicionar um novo servico
+POST http://localhost:3000/servicos
+Content-Type: application/json
+
+{
+  "tipo": "João Sasdasdilva",
+  "data": "2024-11-12 14:30:00",
+  "id_cliente": "ca3b4969-14dc-4ed8-b39d-c42468f3ba3c",
+  "id_cuidador": "e82415b3-116a-4f54-a099-b0601c60024f"
+}
+
+### Read (GET) - Obter todos os servicos
+GET http://localhost:3000/servicos
+
+### Update (PUT) - Atualizar dados de um servico por ID
+PUT http://localhost:3000/servicos/id
+Content-Type: application/json
+
+{
+  "senha": "5678",
+  "name": "João Souza",
+  "cpf_cliente": "12345678901",
+  "endereco": "Avenida Central, 456",
+  "complemento": "Casa 2",
+  "descricao": "Cliente VIP"
+}
+
+### Delete (DELETE) - Remover um servico por ID
+DELETE http://localhost:3000/servicos/id

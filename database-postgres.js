@@ -68,10 +68,10 @@ async deleteCuidador(id) {
 
 // Adicionar um novo admin
 async createAdmin(admin) {
-  const { id_admin, senha } = admin;
+  const { usuario_admin, senha } = admin;
   await sql`
-      INSERT INTO admins (id_admin, senha)
-      VALUES (${id_admin}, ${senha});
+      INSERT INTO admins (id_admin, usuario_admin, senha)
+      VALUES (gen_random_uuid(), ${usuario_admin}, ${senha});
   `;
 }
 
@@ -94,5 +94,45 @@ async updateAdmin(id, admin) {
 // Deletar um admin
 async deleteAdmin(id) {
   await sql`DELETE FROM admins WHERE id_admin = ${id}`;
+}
+
+// CREATE
+async createServico(servico) {
+  const { tipo, data, id_cliente, id_cuidador } = servico;
+  await sql`
+      INSERT INTO servicos (id, tipo, data, id_cliente, id_cuidador)
+      VALUES (gen_random_uuid(), ${tipo}, ${data}, ${id_cliente}, ${id_cuidador});
+  `;
+}
+
+async createAdmin(admin) {
+  const { usuario_admin, senha } = admin;
+  await sql`
+      INSERT INTO admins (id_admin, usuario_admin, senha)
+      VALUES (gen_random_uuid(), ${usuario_admin}, ${senha});
+  `;
+}
+
+// READ
+async listServicos() {
+  const servicos = await sql`SELECT * FROM servicos`;
+  return servicos;
+}
+
+// UPDATE
+async updateServico(id, servico) {
+  await this.query(`
+      UPDATE servicos
+      SET tipo = $1, data = $2, horario = $3, id_cliente = $4, id_cuidador = $5
+      WHERE id = $6
+  `, [servico.tipo, servico.data, servico.horario, servico.id_cliente, servico.id_cuidador, id]);
+}
+
+// DELETE
+async deleteServico(id) {
+  await this.query(`
+      DELETE FROM servicos
+      WHERE id = $1
+  `, [id]);
 }
 }

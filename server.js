@@ -190,15 +190,15 @@ server.post('/admins', async (request, reply) => {
     let error = {};
 
     // Validação de campos obrigatórios
-    if (!body.id_admin) {
-        error.id_admin = 'Valor id_admin não foi informado.';
+    if (!body.usuario_admin) {
+        error.usuario_admin = 'Valor usuario_admin não foi informado.';
     }
     if (!body.senha) {
         error.senha = 'Valor senha não foi informado.';
     }
 
     // Se todos os campos obrigatórios estiverem presentes, cria o admin
-    if (body.id_admin && body.senha) {
+    if (body.usuario_admin && body.senha) {
         await databasePostgres.createAdmin(body);
         return reply.status(201).send();
     } else {
@@ -239,6 +239,86 @@ server.delete('/admins/:id', async (request, reply) => {
     const adminID = request.params.id;
     await databasePostgres.deleteAdmin(adminID);
     return reply.status(204).send();
+});
+
+// CREATE - Serviços
+server.post('/servicos', async (request, reply) => {
+    const body = request.body;
+    let error = {};
+
+    // Validação de campos obrigatórios
+    if (!body.tipo) {
+        error.tipo = 'O tipo do serviço não foi informado.';
+    }
+    if (!body.data) {
+        error.data = 'A data do serviço não foi informada.';
+    }
+    if (!body.id_cliente) {
+        error.id_cliente = 'O ID do cliente não foi informado.';
+    }
+    if (!body.id_cuidador) {
+        error.id_cuidador = 'O ID do cuidador não foi informado.';
+    }
+
+    if (Object.keys(error).length === 0) {
+        await databasePostgres.createServico(body);
+        return reply.status(201).send();
+    } else {
+        return reply.status(400).send(error);
+    }
+});
+
+// READ - Serviços
+server.get('/servicos', async (request, reply) => {
+    try {
+        const servicos = await databasePostgres.listServicos();
+        return reply.status(200).send(servicos);
+    } catch (err) {
+        return reply.status(500).send({ error: 'Erro ao buscar serviços' });
+    }
+});
+
+// UPDATE - Serviços
+server.put('/servicos/:id', async (request, reply) => {
+    const servicoID = request.params.id;
+    const body = request.body;
+    let error = {};
+
+    // Validação de campos obrigatórios
+    if (!body.tipo) {
+        error.tipo = 'O tipo do serviço não foi informado.';
+    }
+    if (!body.data) {
+        error.data = 'A data do serviço não foi informada.';
+    }
+    if (!body.horario) {
+        error.horario = 'O horário do serviço não foi informado.';
+    }
+    if (!body.id_cliente) {
+        error.id_cliente = 'O ID do cliente não foi informado.';
+    }
+    if (!body.id_cuidador) {
+        error.id_cuidador = 'O ID do cuidador não foi informado.';
+    }
+
+    if (Object.keys(error).length === 0 && servicoID) {
+        await databasePostgres.updateServico(servicoID, body);
+        return reply.status(200).send();
+    } else {
+        return reply.status(400).send(error);
+    }
+});
+
+// DELETE - Serviços
+server.delete('/servicos/:id', async (request, reply) => {
+    const servicoID = request.params.id;
+
+    if (servicoID) {
+        await databasePostgres.deleteServico(servicoID);
+        return reply.status(204).send();
+    } else {
+        return reply.status(400).send({ error: 'O ID do serviço não foi informado.' });
+    }
 });
 
 server.listen({
