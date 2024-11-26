@@ -3,9 +3,9 @@ POST http://localhost:3000/clientes
 Content-Type: application/json
 
 {
-  "senha": "1234",
+  "senha": "123",
   "name": "João Sasdasdilva",
-  "cpf_cliente": "12745678901",
+  "cpf_cliente": "123",
   "endereco": "Rua dasasdasd Flores, 123",
   "complemento": "Apasdasdto 45",
   "descricao": "Cliente preferencial"
