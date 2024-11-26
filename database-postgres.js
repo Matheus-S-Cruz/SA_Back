@@ -13,20 +13,20 @@ export class DatabasePostgres {
   // Criar um novo cliente
   async createCliente(Cliente) {
     const id_cliente = randomUUID();
-    const { name, senha, cpf_cliente, descricao, complemento, endereco } = Cliente;
+    const { name, senha, email, cpf_cliente, descricao, complemento, endereco } = Cliente;
 
     // Criptografando a senha antes de salvar
     const senhaCriptografada = await bcrypt.hash(senha, 10);
 
     await sql`
-      INSERT INTO clientes (id_cliente, name, senha, cpf_cliente, endereco, descricao, complemento)
-      VALUES (${id_cliente}, ${name}, ${senhaCriptografada}, ${cpf_cliente}, ${endereco}, ${descricao}, ${complemento})
+      INSERT INTO clientes (id_cliente, name, senha, email, cpf_cliente, endereco, descricao, complemento)
+      VALUES (${id_cliente}, ${name}, ${senhaCriptografada}, ${email}, ${cpf_cliente}, ${endereco}, ${descricao}, ${complemento})
     `;
   }
 
   // Atualizar um cliente existente
   async updateCliente(id_cliente, Cliente) {
-    const { name, senha, cpf_cliente, endereco, descricao, complemento } = Cliente;
+    const { name, senha, email, cpf_cliente, endereco, descricao, complemento } = Cliente;
 
     // Criptografando a nova senha antes de atualizar
     const senhaCriptografada = senha ? await bcrypt.hash(senha, 10) : undefined;
@@ -36,6 +36,7 @@ export class DatabasePostgres {
       SET 
         name = ${name},
         senha = ${senhaCriptografada || sql`senha`},  // Caso a senha não tenha sido fornecida, mantém a senha atual
+        email = ${email},  -- Atualizando o email
         cpf_cliente = ${cpf_cliente},
         endereco = ${endereco},
         descricao = ${descricao},
@@ -51,10 +52,10 @@ export class DatabasePostgres {
 
   // Criar um novo cuidador
   async createCuidador(cuidador) {
-    const { name, senha, cpf_cuidador, endereco, complemento, descricao } = cuidador;
+    const { name, senha, email, cpf_cuidador, endereco, complemento, descricao } = cuidador;
     await sql`
-      INSERT INTO cuidadores (id_cuidador, senha, name, cpf_cuidador, endereco, complemento, descricao)
-      VALUES (gen_random_uuid(), ${senha}, ${name}, ${cpf_cuidador}, ${endereco}, ${complemento}, ${descricao})
+      INSERT INTO cuidadores (id_cuidador, senha, name, email, cpf_cuidador, endereco, complemento, descricao)
+      VALUES (gen_random_uuid(), ${senha}, ${name}, ${email}, ${cpf_cuidador}, ${endereco}, ${complemento}, ${descricao})
     `;
   }
 
@@ -66,10 +67,10 @@ export class DatabasePostgres {
 
   // Atualizar informações de um cuidador
   async updateCuidador(id, cuidador) {
-    const { senha, name, cpf_cuidador, endereco, complemento, descricao } = cuidador;
+    const { senha, name, email, cpf_cuidador, endereco, complemento, descricao } = cuidador;
     await sql`
       UPDATE cuidadores
-      SET senha = ${senha}, name = ${name}, cpf_cuidador = ${cpf_cuidador}, endereco = ${endereco}, complemento = ${complemento}, descricao = ${descricao}
+      SET senha = ${senha}, name = ${name}, email = ${email}, cpf_cuidador = ${cpf_cuidador}, endereco = ${endereco}, complemento = ${complemento}, descricao = ${descricao}
       WHERE id_cuidador = ${id}
     `;
   }

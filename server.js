@@ -57,26 +57,29 @@ server.post('/clientes', async (request, reply) => {
 
     // Validação de campos obrigatórios
     if (!body.name) {
-        error.name = 'Valor name não foi informado.'
+        error.name = 'Valor name não foi informado.';
     }
     if (!body.senha) {
-        error.senha = 'Valor senha não foi informado.'
+        error.senha = 'Valor senha não foi informado.';
+    }
+    if (!body.email) {
+        error.email = 'Valor email não foi informado.';  // Adicionando validação de email
     }
     if (!body.cpf_cliente) {
-        error.cpf_cliente = 'Valor cpf_cliente não foi informado.'
+        error.cpf_cliente = 'Valor cpf_cliente não foi informado.';
     }
     if (!body.endereco) {
-        error.endereco = 'Valor endereço não foi informado.'
+        error.endereco = 'Valor endereço não foi informado.';
     }
     if (!body.complemento) {
-        error.complemento = 'Valor complemento não foi informado.'
+        error.complemento = 'Valor complemento não foi informado.';
     }
     if (!body.descricao) {
-        error.descricao = 'Valor descrição não foi informado.'
+        error.descricao = 'Valor descrição não foi informado.';
     }
 
     // Se todos os campos obrigatórios estiverem presentes, cria o cliente
-    if (body.name && body.endereco) {
+    if (body.name && body.endereco && body.cpf_cliente) {
         await databasePostgres.createCliente(body);
         return reply.status(201).send();
     } else {
@@ -94,40 +97,38 @@ server.get('/clientes', async () => {
 server.put('/clientes/:id', async (request, reply) => {
     const clienteID = request.params.id;
     const body = request.body;
-  
 
     let error = {};
 
-    if(!body.name){
-        error.name = 'Valor name não foi informado.'
+    if (!body.name) {
+        error.name = 'Valor name não foi informado.';
+    }
+    if (!body.senha) {
+        error.senha = 'Valor senha não foi informado.';
+    }
+    if (!body.email) {
+        error.email = 'Valor email não foi informado.';
+    }
+    if (!body.cpf_cliente) {
+        error.cpf_cliente = 'Valor cpf_cliente não foi informado.';
+    }
+    if (!body.endereco) {
+        error.endereco = 'Valor endereço não foi informado.';
+    }
+    if (!body.complemento) {
+        error.complemento = 'Valor complemento não foi informado.';
+    }
+    if (!body.descricao) {
+        error.descricao = 'Valor descrição não foi informado.';
+    }
 
-    } if (!body.senha){
-        error.senha = 'Valor senha não foi informado.'
-    }
-    if (!body.cpf_cliente){
-        error.cpf_cliente = 'Valor cpf_cliente não foi informado.'
-    }
-    if (!body.endereco){
-        error.endereco = 'Valor endereço não foi informado.'
-    }
-    if (!body.complemento){
-    error.complemento = 'Valor complemento não foi informado.'
-     }
-     if (!clienteID){
-        error.complemento = 'Valor ID não foi informado.'
-         }
-     if (!body.descricao){
-error.descricao = 'Valor descrição não foi informado.'
-    }
-    if(body.name && body.endereco && clienteID){
+    if (body.name && body.endereco && clienteID) {
         await databasePostgres.updateCliente(clienteID, body);
         return reply.status(201).send();
-
-    }else{
+    } else {
         return reply.status(400).send(error);
-
     }
-})
+});
 
 // DELETE
 server.delete('/clientes/:id', async (request, reply) => {
@@ -148,6 +149,9 @@ server.post('/cuidadores', async (request, reply) => {
     }
     if (!body.senha) {
         error.senha = 'Valor senha não foi informado.';
+    }
+    if (!body.email) {
+        error.email = 'Valor email não foi informado.';  // Adicionando validação de email
     }
     if (!body.cpf_cuidador) {
         error.cpf_cuidador = 'Valor cpf_cuidador não foi informado.';
@@ -190,6 +194,9 @@ server.put('/cuidadores/:id', async (request, reply) => {
     if (!body.senha) {
         error.senha = 'Valor senha não foi informado.';
     }
+    if (!body.email) {
+        error.email = 'Valor email não foi informado.';  // Adicionando validação de email
+    }
     if (!body.cpf_cuidador) {
         error.cpf_cuidador = 'Valor cpf_cuidador não foi informado.';
     }
@@ -202,13 +209,10 @@ server.put('/cuidadores/:id', async (request, reply) => {
     if (!body.descricao) {
         error.descricao = 'Valor descrição não foi informado.';
     }
-    if (!cuidadorID) {
-        error.id = 'Valor ID não foi informado.';
-    }
 
     if (body.name && body.endereco && cuidadorID) {
         await databasePostgres.updateCuidador(cuidadorID, body);
-        return reply.status(200).send();
+        return reply.status(201).send();
     } else {
         return reply.status(400).send(error);
     }

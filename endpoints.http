@@ -5,6 +5,7 @@ Content-Type: application/json
 {
   "senha": "123",
   "name": "João Sasdasdilva",
+  "email": "joao@gmail.com",
   "cpf_cliente": "123",
   "endereco": "Rua dasasdasd Flores, 123",
   "complemento": "Apasdasdto 45",
@@ -21,6 +22,7 @@ Content-Type: application/json
 {
   "senha": "5678",
   "name": "João Souza",
+  "email": "joaosouza@gmail.com",
   "cpf_cliente": "12345678901",
   "endereco": "Avenida Central, 456",
   "complemento": "Casa 2",
@@ -38,6 +40,7 @@ Content-Type: application/json
 {
   "senha": "1234",
   "name": "Maria Silva",
+  "email": "maria@gmail.com",
   "cpf_cuidador": "98765432100",
   "endereco": "Rua das Palmeiras, 789",
   "complemento": "Apto 6",
@@ -54,6 +57,7 @@ Content-Type: application/json
 {
   "senha": "5678",
   "name": "Maria Oliveira",
+  "email": "mariaoliveira@gmail.com",
   "cpf_cuidador": "12345678901",
   "endereco": "Avenida das Orquídeas, 123",
   "complemento": "Casa 3",

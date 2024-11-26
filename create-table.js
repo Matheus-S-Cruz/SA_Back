@@ -1,10 +1,11 @@
 import { sql } from './db.js'
 
 sql`
-  CREATE TABLE clientes (
+    CREATE TABLE clientes (
       id_cliente text PRIMARY KEY,
       senha varchar(255),
       name varchar(255),
+	  email varchar(100),
       cpf_cliente varchar(11),
       endereco varchar(255),
       complemento varchar(255),
