@@ -12,6 +12,43 @@ server.register(cors, {
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 })
 
+// Adicionando a rota para login do admin
+server.post('/login-admin', async (request, reply) => {
+    const { usuario_admin, senha } = request.body;
+    let error = {};
+
+    // Verifica se o usuário e senha foram fornecidos
+    if (!usuario_admin) {
+        error.usuario_admin = 'Usuário não foi informado.';
+    }
+    if (!senha) {
+        error.senha = 'Senha não foi informada.';
+    }
+
+    if (error.usuario_admin || error.senha) {
+        return reply.status(400).send(error);
+    }
+
+    try {
+        // Verifique se o admin existe no banco de dados
+        const admin = await databasePostgres.verifyAdmin(usuario_admin, senha);
+        
+        if (admin) {
+            // Retorne uma resposta de sucesso
+            return reply.status(200).send({
+                message: 'Login realizado com sucesso!',
+                admin: admin // ou outro dado relevante
+            });
+        } else {
+            // Se não encontrar, retorna um erro
+            return reply.status(401).send({ error: 'Usuário ou senha incorretos.' });
+        }
+    } catch (err) {
+        // Em caso de erro no banco ou algum erro interno
+        console.error('Erro ao realizar o login:', err);
+        return reply.status(500).send({ error: 'Erro ao realizar o login.' });
+    }
+});
 
 // CREATE
 server.post('/clientes', async (request, reply) => {
