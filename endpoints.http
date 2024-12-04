@@ -38,12 +38,12 @@ Content-Type: application/json
 
 {
   "senha": "1234",
-  "name": "Maria Silva",
-  "email": "maria@gmail.com",
-  "cpf_cuidador": "98765432100",
-  "endereco": "Rua das Palmeiras, 789",
-  "complemento": "Apto 6",
-  "descricao": "Cuidadora experiente"
+  "name": "Pedro Aleksander",
+  "email": "pedroa@gmail.com",
+  "cpf_cuidador": "12345678900",
+  "endereco": "Rua Osmar Pinto, 489",
+  "complemento": "casa",
+  "descricao": "Cuidador experiente em massagem..."
 }
 
 ### Read (GET) - Obter todos os cuidadores
