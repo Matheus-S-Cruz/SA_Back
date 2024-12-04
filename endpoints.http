@@ -16,11 +16,10 @@ Content-Type: application/json
 GET http://localhost:3000/clientes
 
 ### Update (PUT) - Atualizar dados de um cliente por ID
-PUT http://localhost:3000/clientes/id
+PUT http://localhost:3000/clientes/d7831696-63f5-4295-92ac-4c58e1d43d84
 Content-Type: application/json
 
 {
-  "senha": "5678",
   "name": "João Souza",
   "email": "joaosouza@gmail.com",
   "cpf_cliente": "12345678901",

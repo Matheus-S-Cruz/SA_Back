@@ -4,9 +4,9 @@ const sql = postgres({
   host: 'localhost',   
   port: 5432,
   database: 'postgres',
-  user: postgres,    
-  password: '12345',
-  // password: 'senai', 
+  user: 'postgres',    
+  // password: '12345',
+  password: 'senai', 
 });
 
 async function createDatabase() {

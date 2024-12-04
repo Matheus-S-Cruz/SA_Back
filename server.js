@@ -103,9 +103,6 @@ server.put('/clientes/:id', async (request, reply) => {
     if (!body.name) {
         error.name = 'Valor name não foi informado.';
     }
-    if (!body.senha) {
-        error.senha = 'Valor senha não foi informado.';
-    }
     if (!body.email) {
         error.email = 'Valor email não foi informado.';
     }
@@ -190,9 +187,6 @@ server.put('/cuidadores/:id', async (request, reply) => {
 
     if (!body.name) {
         error.name = 'Valor name não foi informado.';
-    }
-    if (!body.senha) {
-        error.senha = 'Valor senha não foi informado.';
     }
     if (!body.email) {
         error.email = 'Valor email não foi informado.';  // Adicionando validação de email

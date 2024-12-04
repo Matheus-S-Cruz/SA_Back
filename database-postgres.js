@@ -35,8 +35,8 @@ export class DatabasePostgres {
       UPDATE clientes
       SET 
         name = ${name},
-        senha = ${senhaCriptografada || sql`senha`},  // Caso a senha não tenha sido fornecida, mantém a senha atual
-        email = ${email},  -- Atualizando o email
+        senha = ${senhaCriptografada !== undefined ? senhaCriptografada : sql`senha`},  -- Se a senha não for fornecida, mantemos a senha atual
+        email = ${email},
         cpf_cliente = ${cpf_cliente},
         endereco = ${endereco},
         descricao = ${descricao},
@@ -66,15 +66,25 @@ export class DatabasePostgres {
   }
 
   // Atualizar informações de um cuidador
-  async updateCuidador(id, cuidador) {
-    const { senha, name, email, cpf_cuidador, endereco, complemento, descricao } = cuidador;
+  async updateCuidador(id_cuidador, Cuidador) {
+    const { name, senha, email, cpf_cuidador, endereco, descricao, complemento } = Cuidador;
+
+    // Criptografando a nova senha antes de atualizar
+    const senhaCriptografada = senha ? await bcrypt.hash(senha, 10) : undefined;
+
     await sql`
       UPDATE cuidadores
-      SET senha = ${senha}, name = ${name}, email = ${email}, cpf_cuidador = ${cpf_cuidador}, endereco = ${endereco}, complemento = ${complemento}, descricao = ${descricao}
-      WHERE id_cuidador = ${id}
+      SET 
+        name = ${name},
+        senha = ${senhaCriptografada !== undefined ? senhaCriptografada : sql`senha`},  -- Se a senha não for fornecida, mantemos a senha atual
+        email = ${email},
+        cpf_cuidador = ${cpf_cuidador},
+        endereco = ${endereco},
+        descricao = ${descricao},
+        complemento = ${complemento}
+      WHERE id_cuidador = ${id_cuidador}
     `;
   }
-
   // Deletar um cuidador
   async deleteCuidador(id) {
     await sql`DELETE FROM cuidadores WHERE id_cuidador = ${id}`;
